@@ -23,7 +23,9 @@ listOrdered xs = snd $ foldr go (Nothing, True) xs
         go y (Just x, t) = (Just y, x >= y)
 
 propSort :: [Int] -> Bool
-propSort = listOrdered . sort
+propSort xs
+  | listOrdered xs = xs == (sort xs)
+  | otherwise = xs /= (sort xs)
 
 -- 3.
 plusAssociative :: Int -> Int -> Int -> Bool
@@ -69,7 +71,7 @@ applyProp (Fun _ f) a = (f $ a) == (f a)
 
 composeProp :: Fun Char Double -> Fun Int Char -> Int -> Bool
 composeProp (Fun _ f) (Fun _ g) x = (f . g) x == f (g x)
--- alternatively with apply :: Fun a b -> a -> b 
+-- alternatively with apply :: Fun a b -> a -> b
 -- composeProp f g x = ((apply f) . (apply g)) x == (apply f) ((apply g) x)
 
 -- 9.
