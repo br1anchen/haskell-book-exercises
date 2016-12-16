@@ -432,9 +432,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_2_hello_haskell">2 Hello, Haskell!</a>
 <ul class="sectlevel2">
-<li><a href="#_2_4_functions">2.4 Functions</a></li>
-<li><a href="#_2_5_infix">2.5 Infix</a></li>
-<li><a href="#_2_6_declaring_values">2.6 Declaring values</a></li>
+<li><a href="#_2_5_functions">2.5 Functions</a></li>
+<li><a href="#_2_6_infix_operators">2.6 Infix Operators</a></li>
+<li><a href="#_2_7_declaring_values">2.7 Declaring values</a></li>
 <li><a href="#_2_12_let_and_where">2.12 Let and where</a></li>
 <li><a href="#_2_13_chapter_exercises">2.13 Chapter Exercises</a></li>
 </ul>
@@ -663,7 +663,7 @@ This document is written in asciidoc, use Asciidoctor to build <code>asciidoctor
 <p>b) <code>λxy.xz</code> equals <code>λmn.mz</code></p>
 </li>
 <li>
-<p>c) <code>λxy.xxy</code> equals <code>λa(λb).aab</code> although it should be <code>λa(λb.aab)</code> I think</p>
+<p>c) <code>λxy.xxy</code> equals <code>λa(λb.aab)</code></p>
 </li>
 <li>
 <p>b) <code>λxyz.zx</code> equals <code>λtos.st</code></p>
@@ -685,19 +685,19 @@ This document is written in asciidoc, use Asciidoctor to build <code>asciidoctor
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>λx.xxx</code> - yes</p>
+<p><code>λx.xxx</code>       - yes</p>
 </li>
 <li>
-<p><code>λxy.zx</code> - no, <code>z</code> not in head</p>
+<p><code>λxy.zx</code>       - no, <code>z</code> not in head</p>
 </li>
 <li>
-<p><code>λxyz.xy(zx)</code> - yes</p>
+<p><code>λxyz.xy(zx)</code>  - yes</p>
 </li>
 <li>
 <p><code>λxyz.xy(zxy)</code> - yes</p>
 </li>
 <li>
-<p><code>λxy.xy(zxy)</code> - no, <code>z</code> not in head</p>
+<p><code>λxy.xy(zxy)</code>  - no, <code>z</code> not in head</p>
 </li>
 </ol>
 </div>
@@ -710,13 +710,13 @@ This document is written in asciidoc, use Asciidoctor to build <code>asciidoctor
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>λx.xxx</code> - converge, no reduction</p>
+<p><code>λx.xxx</code>          - converge, no reduction</p>
 </li>
 <li>
-<p><code>(λz.zzz)(λy.yy)</code> - diverge, <code>(λz.zzz)(λy.yy) &#8594; (λy.yy)(λy.yy)(λy.yy) &#8594; λy.yy)(λy.yy(λy.yy)</code> into more nested expressions</p>
+<p><code>(λz.zzz)(λy.yy)</code> - diverge, <code>(λz.zzz)(λy.yy) &#8594; (λy.yy)(λy.yy)(λy.yy) &#8594; λy.yy)(λy.yy(λy.yy)</code> into more nested expressions. Also, alpha-equivalent to divergent example <code>(λx.xx)(λx.xx)</code></p>
 </li>
 <li>
-<p><code>(λx.xxx)z</code> - converge, <code>(λx.xxx)z &#8594; zzz</code></p>
+<p><code>(λx.xxx)z</code>       - converge, <code>(λx.xxx)z &#8594; zzz</code></p>
 </li>
 </ol>
 </div>
@@ -724,12 +724,12 @@ This document is written in asciidoc, use Asciidoctor to build <code>asciidoctor
 <div class="sect3">
 <h4 id="_beta_reduce">Beta reduce</h4>
 <div class="paragraph">
-<p>Reduce in normal order, that is leftmost outermost first. Otherwise you get different results.</p>
+<p>Reduce in normal order (leftmost outermost first). Otherwise you get different results.</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>(λabc.cba)zz(λwv.w) &#8594; (λc.czz)(λwv.w) &#8594; (λwv.w)zz &#8594; z</code></p>
+<p><code>(λabc.cba)zz(λwv.w) &#8594; (λa.λb.λc.cba)zz(λw.λv.w) &#8594; (λb.λc.cbz)z(λw.λv.w) &#8594; (λc.czz)(λw.λv.w) &#8594; (λw.λv.w)zz &#8594; (λv.z)z &#8594; z</code></p>
 </li>
 <li>
 <p><code>(λx.λy.xyy)(λa.a)b &#8594; (λy.(λa.a)yy)b &#8594; (λa.a)bb &#8594; bb</code></p>
@@ -747,7 +747,7 @@ This document is written in asciidoc, use Asciidoctor to build <code>asciidoctor
 <p><code>(λa.aa)(λb.ba)c &#8594; (λb.ba)(λb.ba)c &#8594; ((λb.ba)a)c &#8594; aac</code></p>
 </li>
 <li>
-<p><code>(λxyz.xz(yz))(λx.z)(λx.a) &#8594; (λyz1.(λx.z)z1(yz1))(λx.a) &#8594; (λz1.(λx.z)z1λx.a)z1 &#8594; (λz1.zλx.a)z1 &#8594; λz1.za</code></p>
+<p><code>(λxyz.xz(yz))(λx.z)(λx.a) &#8594; (λx.λy.λz.xz(yz))(λx.z)(λx.a) &#8594; (λy.λz1.(λx.z)z1(yz1))(λx.a) &#8594; (λz1.(λx.z)z1λx.a)z1 &#8594; (λz1.zλx.a)z1 &#8594; λz1.za</code></p>
 </li>
 </ol>
 </div>
@@ -759,9 +759,9 @@ This document is written in asciidoc, use Asciidoctor to build <code>asciidoctor
 <h2 id="_2_hello_haskell">2 Hello, Haskell!</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_2_4_functions">2.4 Functions</h3>
+<h3 id="_2_5_functions">2.5 Functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_2">Intermission: Exercises</h4>
+<h4 id="_exercises_comprehension_check">Exercises: Comprehension Check</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">let half x = x / 2
@@ -771,13 +771,18 @@ let square x = x * x</code></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">dpi x = 3.14 * (x * x)</code></pre>
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">dpi x = 3.14 * x * x</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">dpi x = pi * x * x</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_5_infix">2.5 Infix</h3>
+<h3 id="_2_6_infix_operators">2.6 Infix Operators</h3>
 <div class="sect3">
 <h4 id="_associativity_and_precedence">Associativity and precedence</h4>
 <div class="paragraph">
@@ -815,53 +820,68 @@ Prelude&gt; (2 ^ 3) ^ 4
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_3">Intermission: Exercises</h4>
-<div class="paragraph">
-<p>they differ</p>
-</div>
+<h4 id="_exercises_parentheses_and_association">Exercises: Parentheses and Association</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Different, because <code>(*)</code> has a higher precedence than <code>(+)</code> (7 vs. 6)</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">8 + 7 * 9 = 71
 (8 + 7) * 9 = 135</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>they are the same</p>
-</div>
+</li>
+<li>
+<p>The same, based on the same precedence comparison as 1</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">perimeter x y = (x * 2) + (y * 2)
 perimeter x y = x * 2 + y * 2</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>they differ</p>
-</div>
+</li>
+<li>
+<p>Different, because <code>(/)</code> has a higher precedence than <code>(+)</code> (7 vs. 6)</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">f x = x / 2 + 9
 f x = x / (2 + 9)</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_2_6_declaring_values">2.6 Declaring values</h3>
-<div class="paragraph">
-<p>fix mistakes</p>
-</div>
+<h3 id="_2_7_declaring_values">2.7 Declaring values</h3>
+<div class="sect3">
+<h4 id="_exercises_heal_the_sick">Exercises: Heal the Sick</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Erroneous space after 3</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">let area x = 3. 14 * (x * x)
+-- fix
 let area x = 3.14 * (x * x)</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p><code>b</code> not defined in scope of <code>double</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">let double x = b * 2
+-- fix
 let double x = x * 2</code></pre>
 </div>
 </div>
+</li>
+<li>
+<p>Improper alignment, top-level expressions should be defined on the same level of indentation</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">-- file ch02_2.6_1.hs
@@ -881,11 +901,15 @@ y = 10
 f = x + y</code></pre>
 </div>
 </div>
+</li>
+</ol>
+</div>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_2_12_let_and_where">2.12 Let and where</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
+<h4 id="_exercises_a_head_code">Exercises: A Head Code</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">let x = 5 in x
@@ -920,10 +944,7 @@ f4 = x + 3
 </div>
 </div>
 <div class="sect3">
-<h4 id="_more_exercises">More exercises!</h4>
-<div class="paragraph">
-<p><code><strong>let</strong></code> rewritten to <code><strong>where</strong></code></p>
-</div>
+<h4 id="_let_rewritten_to_where_for_new_expressions">let rewritten to where for new expressions</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">--let x = 3; y = 1000 in x * 3 + y
@@ -949,38 +970,49 @@ f3 = z / x + y
 <h3 id="_2_13_chapter_exercises">2.13 Chapter Exercises</h3>
 <div class="sect3">
 <h4 id="_parenthesization">Parenthesization</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><code>2 + 2 * 3 - 1</code> == <code>2 + (2 * 3) - 1</code></p>
-</li>
-<li>
-<p><code>(^) 10 $ 1 + 1</code> == <code>(^) 10 (1 + 1)</code></p>
-</li>
-<li>
-<p><code>2 ^ 2 * 4 ^ 5 + 1</code> == <code>( (2 ^ 2) * (4 ^ 5) ) + 1</code></p>
-</li>
-</ol>
+<div class="paragraph">
+<p>(Ignoring single-element and whole-element parenthesization)</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">2 + 2 * 3 - 1
+2 + (2 * 3) - 1
+(2 + (2 * 3)) - 1</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">(^) 10 $ 1 + 1
+(^) 10 $ (1 + 1)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">2 ^ 2 * 4 ^ 5 + 1
+(2 ^ 2) * 4 ^ 5 + 1
+(2 ^ 2) * (4 ^ 5) + 1
+((2^2) * (4 ^ 5)) + 1</code></pre>
+</div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_equivalent_expressions">Equivalent expressions</h4>
+<h4 id="_equivalent_expressions">Equivalent Expressions</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>1 + 1 == 2</code></p>
+<p>Equivalent</p>
 </li>
 <li>
-<p><code>10 ^ 2 == 10 + 9 * 10</code></p>
+<p>Equivalent (<code>10 ^ 2 = 100</code>, <code>10 + 9 * 10 == 10 + (9 * 10) == 10 + 90 = 100</code>)</p>
 </li>
 <li>
-<p><code>400 - 37 /= (-) 37 400</code></p>
+<p>Non-equivalent (<code>400 - 37 = 363</code>, <code>(-) 37 400 == 37 - 400 = 363</code>)</p>
 </li>
 <li>
-<p><code>100 `div` 3 /= 100 / 3</code></p>
+<p>Non-equivalent (<code>div 100 3 = 33</code>, <code>100/3 == 33.33..</code>)</p>
 </li>
 <li>
-<p><code>2 * 5 + 18 /= 2 * (5 + 18)</code></p>
+<p>Non-equivalent (<code>2 * 5 + 18 == (2 * 5) + 18 == 10 + 18 = 28</code>, <code>2 * (5 + 8) = 2 * 23 = 46</code>)</p>
 </li>
 </ol>
 </div>
@@ -1012,7 +1044,7 @@ let waxOn = x * 5</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>results of</p>
+<p><code><strong>waxOn</strong></code> results</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">10 + waxOn
@@ -1078,7 +1110,7 @@ waxOff x = triple x</code></pre>
 <div class="sect2">
 <h3 id="_3_3_printing_simple_things">3.3 Printing simple things</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_2">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>all in scope</p>
 </div>
@@ -1304,7 +1336,7 @@ changeMood _ = Blah</code></pre>
 <div class="sect2">
 <h3 id="_4_4_comparing_values">4.4 Comparing values</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_3">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1556,7 +1588,7 @@ f xs = w `x` 1
 <div class="sect2">
 <h3 id="_5_4_typeclass_constrained_type_variables">5.4 Typeclass-constrained type variables</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>pair functions and signatures</p>
 </div>
@@ -1623,7 +1655,7 @@ f (1 :: Int) :: Int -&gt; Int -&gt; Int</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1714,7 +1746,7 @@ kessel (1 :: Integer) 2 :: Integer</code></pre>
 <div class="sect2">
 <h3 id="_5_6_polymorphism">5.6 Polymorphism</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1752,7 +1784,7 @@ f a b = b</code></pre>
 <div class="sect2">
 <h3 id="_5_7_type_inference">5.7 Type inference</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2091,7 +2123,7 @@ munge f g = fst . g . f</code></pre>
 <div class="sect2">
 <h3 id="_6_7_ord">6.7 Ord</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2133,7 +2165,7 @@ munge f g = fst . g . f</code></pre>
 <div class="sect2">
 <h3 id="_6_12_writing_instances_for_your_typeclasses">6.12 Writing instances for your typeclasses</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>Write the <code><strong>Eq</strong></code> instance for the datatype provided</p>
 </div>
@@ -2646,7 +2678,7 @@ f (a, b, c) (d, e, f) = ((a, d), (c, f))</code></pre>
 <div class="sect2">
 <h3 id="_7_6_case_expressions">7.6 Case expressions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>rewrite <code><strong>if-then-else</strong></code> expressions into case expressions</p>
 </div>
@@ -2683,7 +2715,7 @@ ifEvenAdd2' n = case even n of
 <div class="sect2">
 <h3 id="_7_7_higher_order_functions">7.7 Higher-order functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">dodgy :: Num a =&gt; a -&gt; a -&gt; a
@@ -2735,7 +2767,7 @@ oneIsTwo = (flip dodgy) 2</code></pre>
 <div class="sect2">
 <h3 id="_7_8_guards">7.8 Guards</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3266,7 +3298,7 @@ eftChar = undefined</code></pre>
 <div class="sect2">
 <h3 id="_9_6_extracting_portions_of_lists">9.6 Extracting portions of lists</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_16">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3494,7 +3526,7 @@ Prelude&gt; let myCube = [y^3 | y &lt;- [1..5]]</code></pre>
 <div class="sect2">
 <h3 id="_9_8_spines_and_non_strict_evaluation">9.8 Spines and non-strict evaluation</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_17">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
 
 </div>
 <div class="sect3">
@@ -3990,7 +4022,7 @@ myMinimum xs = myMinimumBy (\a b -&gt; compare a b) xs</code></pre>
 <div class="sect2">
 <h3 id="_10_5_fold_left">10.5 Fold left</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_18">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4064,7 +4096,7 @@ foldl (*) 1 [1..5]</code></pre>
 <div class="sect2">
 <h3 id="_10_6_how_to_write_fold_functions">10.6 How to write fold functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_19">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_16">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">import Data.Time
@@ -4472,7 +4504,7 @@ isPlane _ = False</code></pre>
 <div class="sect2">
 <h3 id="_11_7_what_makes_these_datatypes_algebraic">11.7 What makes these datatypes algebraic?</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_20">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_17">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4570,7 +4602,7 @@ newtype Goats = Goats Int deriving (Eq, Show, TooMany)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_21">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_18">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4696,7 +4728,7 @@ instance (Num a, Ord a) =&gt; TooMany (a, a) where
 <div class="sect2">
 <h3 id="_11_8_sum_types">11.8 Sum types</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_22">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_19">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4941,7 +4973,7 @@ convert8 Both = True</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_23">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_20">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -6435,7 +6467,9 @@ listOrdered xs = snd $ foldr go (Nothing, True) xs
         go y (Just x, t) = (Just y, x &gt;= y)
 
 propSort :: [Int] -&gt; Bool
-propSort = listOrdered . sort
+propSort xs
+  | listOrdered xs = xs == (sort xs)
+  | otherwise = xs /= (sort xs)
 
 -- 3.
 plusAssociative :: Int -&gt; Int -&gt; Int -&gt; Bool
@@ -7637,7 +7671,7 @@ main = do
 <div class="sect2">
 <h3 id="_16_4_let_s_talk_about_f_baby">16.4 Let’s talk about f , baby</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_24">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_21">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>because kind of <code>(&#8594;)</code> is <code>(&#8594;) :: * &#8594; * &#8594; *</code> the following is</p>
 </div>
@@ -11474,7 +11508,7 @@ main = do
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-05-18 18:58:14 IDT
+Last updated 2016-12-16 15:30:43 CST
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

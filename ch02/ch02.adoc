@@ -1,6 +1,6 @@
 == 2 Hello, Haskell!
-=== 2.4 Functions
-==== Intermission: Exercises
+=== 2.5 Functions
+==== Exercises: Comprehension Check
 
 [source]
 ----
@@ -11,10 +11,15 @@ let square x = x * x
 
 [source]
 ----
-dpi x = 3.14 * (x * x)
+dpi x = 3.14 * x * x
 ----
 
-=== 2.5 Infix
+[source]
+----
+dpi x = pi * x * x
+----
+
+=== 2.6 Infix Operators
 ==== Associativity and precedence
 Higher precedence is applied first. Scale is 0-9.
 [source]
@@ -43,44 +48,55 @@ Prelude> (2 ^ 3) ^ 4
 4096
 ----
 
-==== Intermission: Exercises
+==== Exercises: Parentheses and Association
 
-they differ
+. Different, because `(*)` has a higher precedence than `(+)` (7 vs. 6)
++
 [source]
 ----
 8 + 7 * 9 = 71
 (8 + 7) * 9 = 135
 ----
 
-they are the same
+. The same, based on the same precedence comparison as 1
++
 [source]
 ----
 perimeter x y = (x * 2) + (y * 2)
 perimeter x y = x * 2 + y * 2
 ----
 
-they differ
+. Different, because `(/)` has a higher precedence than `(+)` (7 vs. 6)
++
 [source]
 ----
 f x = x / 2 + 9
 f x = x / (2 + 9)
 ----
 
-=== 2.6 Declaring values
+=== 2.7 Declaring values
+==== Exercises: Heal the Sick
 
-fix mistakes
+. Erroneous space after 3
++
 [source]
 ----
 let area x = 3. 14 * (x * x)
+-- fix
 let area x = 3.14 * (x * x)
 ----
 
+. `b` not defined in scope of `double`
++
 [source]
 ----
 let double x = b * 2
+-- fix
 let double x = x * 2
 ----
 
+. Improper alignment, top-level expressions should be defined on the same level of indentation
++
 [source]
 ----
 include::ch02_2.6_1.hs[]
@@ -98,8 +114,8 @@ f = x + y
 ----
 
 === 2.12 Let and where
+==== Exercises: A Head Code
 
-==== Intermission: Exercises
 [source]
 ----
 let x = 5 in x
@@ -130,8 +146,8 @@ f4 = x + 3
          y = 1000
 ----
 
-==== More exercises!
-`*let*` rewritten to `*where*`
+==== let rewritten to where for new expressions
+
 [source]
 ----
 include::ch02_2.12_1.hs[]
@@ -140,17 +156,35 @@ include::ch02_2.12_1.hs[]
 === 2.13 Chapter Exercises
 ==== Parenthesization
 
-. `2 + 2 * 3 - 1` == `2 + (2 * 3) - 1`
-. `(^) 10 $ 1 + 1` == `(^) 10 (1 + 1)`
-. `2 ^ 2 * 4 ^ 5 + 1` == `( (2 ^ 2) * (4 ^ 5) ) + 1`
+(Ignoring single-element and whole-element parenthesization)
 
-==== Equivalent expressions
+[source]
+----
+2 + 2 * 3 - 1
+2 + (2 * 3) - 1
+(2 + (2 * 3)) - 1
+----
 
-. `1 + 1 == 2`
-. `10 ^ 2 == 10 + 9 * 10`
-. `400 - 37 /= (-) 37 400`
-. `100 pass:[`div`] 3 /= 100 / 3`
-. `2 * 5 + 18 /= 2 * (5 + 18)`
+[source]
+----
+(^) 10 $ 1 + 1
+(^) 10 $ (1 + 1)
+----
+
+[source]
+----
+2 ^ 2 * 4 ^ 5 + 1
+(2 ^ 2) * 4 ^ 5 + 1
+(2 ^ 2) * (4 ^ 5) + 1
+((2^2) * (4 ^ 5)) + 1
+----
+
+==== Equivalent Expressions
+. Equivalent
+. Equivalent (`10 ^ 2 = 100`, `10 + 9 * 10 == 10 + (9 * 10) == 10 + 90 = 100`)
+. Non-equivalent (`400 - 37 = 363`, `(-) 37 400 == 37 - 400 = 363`)
+. Non-equivalent (`div 100 3 = 33`, `100/3 == 33.33..`)
+. Non-equivalent (`2 * 5 + 18 == (2 * 5) + 18 == 10 + 18 = 28`, `2 * (5 + 8) = 2 * 23 = 46`)
 
 ==== More fun with functions
 
@@ -171,7 +205,7 @@ let waxOn = x * 5
 ----
 `waxOn == 1125`
 
-. results of
+. `*waxOn*` results
 +
 [source]
 ----
