@@ -1,69 +1,77 @@
-== 3 String
-=== 3.3 Printing simple things
-==== Intermission: Exercises
-all in scope
+== 3 String: Simple Operations with Text
+=== 3.4 Top-level versus local definitions
+==== Exercises: Scope
 
-. `y` in scope for `z`
-. `h` is not in scope for `g`
-. cannot be laoded with error: Not in scope: ‘d’
-. `r` and `p` are in scope for `area`
+. Yes, `y` in scope for `z`
+. No, `h` is not in scope for `g`
+. No, `d` is local to `area` and thus out of scope in `r = d / 2`
+. Yes, `r` and `p` are in scope for `area`
 
-=== 3.4 Type sigmatures of concatenation functions
+=== 3.5 Types of concatenation functions
+==== Exercises: Syntax Errors
 
-fix errors
+. Does nto compile because infix operator is used as prefix
++
 [source]
 ----
 ++ [1, 2, 3] [4, 5, 6]
 -- fix
 (++) [1, 2, 3] [4, 5, 6]
+----
 
+. Does not compile due to incorrect symbol surrounding strings
++
+[source]
+----
 '<3' ++ ' Haskell'
 --fix
 "<3" ++ " Haskell"
-
-concat ["<3", " Haskell"]
--- working
 ----
 
-=== 3.5 Concatenation and scoping
-`Print3Broken` can be fixed simply by moving `greeting = "Yarrrrr"` to top level.
+. Compiles. Result: "<3 Haskell"
++
+[source]
+----
+concat ["<3", " Haskell"]
+----
 
-=== 3.7 Chapter Exercises
-==== Readinx syntax
+=== 3.8 Chapter Exercises
+==== Reading syntax
+Fixing Errors:
 
-fix errors
+
 [source]
 ----
 concat [[1, 2, 3], [4, 5, 6]]
--- working
+-- Working
 
 ++ [1, 2, 3] [4, 5, 6]
--- fix
+-- Incorrect (infix used as prefix). Fix:
 (++) [1, 2, 3] [4, 5, 6]
 
 (++) "hello" " world"
--- working
+-- Working
 
 ["hello" ++ " world]
--- fix
+-- Incorrect (missing closing "). Fix:
 ["hello" ++ " world"]
 
 4 !! "hello"
--- fix
+-- Incorrect (order of arguments). Fix:
 "hello" !! 4
 
 (!!) "hello" 4
--- working
+-- Working
 
 take "4 lovely"
--- fix
+-- Incorrect (placement of opening "). Fix:
 take 4 "lovely"
 
 take 3 "awesome"
--- working
+-- Working
 ----
 
-pair code and results
+Pair code with result
 [source]
 ----
 -- a) - d)
@@ -89,41 +97,32 @@ concat [tail [1, 2, 3], tail [4, 5, 6], tail [7, 8, 9]]
 
 ==== Building functions
 
-. list manipulations
-+
+. String/list manipulation functions (includes 1 and 2)
 [source]
 ----
--- a)
-"Curry is awesome" ++ "!" == "Curry is awesome!"
-
--- b)
-"Curry is awesome!" !! 4 == "y"
-
--- c)
-drop 9 "Curry is awesome!" == "awesome!"
-----
-. same code in file
-+
-[source]
-----
-include::ch03_3.7_1.hs[]
-----
-. third letter
-+
-[source]
-----
-include::ch03_3.7_2.hs[]
-----
-. letter index
-+
-[source]
-----
-include::ch03_3.7_2_1.hs[]
-----
-. make reverse function using `drop` and `take` for a fixed input. this point includes point 6.
-+
-[source]
-----
-include::ch03_3.7_3.hs[]
+include::ch03_3.8_1.hs[]
 ----
 
+. `*thirdLetter*`
+[source]
+----
+include::ch03_3.8_2.hs[]
+----
+
+. Letter index
+[source]
+----
+include::ch03_3.8_3.hs[]
+----
+
+. Reverse function using `drop` and `take` (for fixed input)
+[source]
+----
+include::ch03_3.8_4.hs[]
+----
+
+. Extension of previous
+[source]
+----
+include::ch03_3.8_5.hs[]
+----

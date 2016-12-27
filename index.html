@@ -439,12 +439,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_2_13_chapter_exercises">2.13 Chapter Exercises</a></li>
 </ul>
 </li>
-<li><a href="#_3_string">3 String</a>
+<li><a href="#_3_string_simple_operations_with_text">3 String: Simple Operations with Text</a>
 <ul class="sectlevel2">
-<li><a href="#_3_3_printing_simple_things">3.3 Printing simple things</a></li>
-<li><a href="#_3_4_type_sigmatures_of_concatenation_functions">3.4 Type sigmatures of concatenation functions</a></li>
-<li><a href="#_3_5_concatenation_and_scoping">3.5 Concatenation and scoping</a></li>
-<li><a href="#_3_7_chapter_exercises">3.7 Chapter Exercises</a></li>
+<li><a href="#_3_4_top_level_versus_local_definitions">3.4 Top-level versus local definitions</a></li>
+<li><a href="#_3_5_types_of_concatenation_functions">3.5 Types of concatenation functions</a></li>
+<li><a href="#_3_8_chapter_exercises">3.8 Chapter Exercises</a></li>
 </ul>
 </li>
 <li><a href="#_4_basic_datatypes">4 Basic datatypes</a>
@@ -1105,99 +1104,108 @@ waxOff x = triple x</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_3_string">3 String</h2>
+<h2 id="_3_string_simple_operations_with_text">3 String: Simple Operations with Text</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_3_3_printing_simple_things">3.3 Printing simple things</h3>
+<h3 id="_3_4_top_level_versus_local_definitions">3.4 Top-level versus local definitions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_2">Intermission: Exercises</h4>
-<div class="paragraph">
-<p>all in scope</p>
-</div>
+<h4 id="_exercises_scope">Exercises: Scope</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>y</code> in scope for <code>z</code></p>
+<p>Yes, <code>y</code> in scope for <code>z</code></p>
 </li>
 <li>
-<p><code>h</code> is not in scope for <code>g</code></p>
+<p>No, <code>h</code> is not in scope for <code>g</code></p>
 </li>
 <li>
-<p>cannot be laoded with error: Not in scope: ‘d’</p>
+<p>No, <code>d</code> is local to <code>area</code> and thus out of scope in <code>r = d / 2</code></p>
 </li>
 <li>
-<p><code>r</code> and <code>p</code> are in scope for <code>area</code></p>
+<p>Yes, <code>r</code> and <code>p</code> are in scope for <code>area</code></p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_3_4_type_sigmatures_of_concatenation_functions">3.4 Type sigmatures of concatenation functions</h3>
-<div class="paragraph">
-<p>fix errors</p>
-</div>
+<h3 id="_3_5_types_of_concatenation_functions">3.5 Types of concatenation functions</h3>
+<div class="sect3">
+<h4 id="_exercises_syntax_errors">Exercises: Syntax Errors</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Does nto compile because infix operator is used as prefix</p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">++ [1, 2, 3] [4, 5, 6]
 -- fix
-(++) [1, 2, 3] [4, 5, 6]
-
-'&lt;3' ++ ' Haskell'
+(++) [1, 2, 3] [4, 5, 6]</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Does not compile due to incorrect symbol surrounding strings</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">'&lt;3' ++ ' Haskell'
 --fix
-"&lt;3" ++ " Haskell"
-
-concat ["&lt;3", " Haskell"]
--- working</code></pre>
+"&lt;3" ++ " Haskell"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Compiles. Result: "&lt;3 Haskell"</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">concat ["&lt;3", " Haskell"]</code></pre>
+</div>
+</div>
+</li>
+</ol>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_3_5_concatenation_and_scoping">3.5 Concatenation and scoping</h3>
-<div class="paragraph">
-<p><code>Print3Broken</code> can be fixed simply by moving <code>greeting = "Yarrrrr"</code> to top level.</p>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_3_7_chapter_exercises">3.7 Chapter Exercises</h3>
+<h3 id="_3_8_chapter_exercises">3.8 Chapter Exercises</h3>
 <div class="sect3">
-<h4 id="_readinx_syntax">Readinx syntax</h4>
+<h4 id="_reading_syntax">Reading syntax</h4>
 <div class="paragraph">
-<p>fix errors</p>
+<p>Fixing Errors:</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">concat [[1, 2, 3], [4, 5, 6]]
--- working
+-- Working
 
 ++ [1, 2, 3] [4, 5, 6]
--- fix
+-- Incorrect (infix used as prefix). Fix:
 (++) [1, 2, 3] [4, 5, 6]
 
 (++) "hello" " world"
--- working
+-- Working
 
 ["hello" ++ " world]
--- fix
+-- Incorrect (missing closing "). Fix:
 ["hello" ++ " world"]
 
 4 !! "hello"
--- fix
+-- Incorrect (order of arguments). Fix:
 "hello" !! 4
 
 (!!) "hello" 4
--- working
+-- Working
 
 take "4 lovely"
--- fix
+-- Incorrect (placement of opening "). Fix:
 take 4 "lovely"
 
 take 3 "awesome"
--- working</code></pre>
+-- Working</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>pair code and results</p>
+<p>Pair code with result</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -1228,65 +1236,89 @@ concat [tail [1, 2, 3], tail [4, 5, 6], tail [7, 8, 9]]
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>list manipulations</p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">-- a)
-"Curry is awesome" ++ "!" == "Curry is awesome!"
-
--- b)
-"Curry is awesome!" !! 4 == "y"
-
--- c)
-drop 9 "Curry is awesome!" == "awesome!"</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>same code in file</p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">c1 s = s ++ "!"
-
-c2 s = s !! 4
-
-c3 s = drop 9 s</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>third letter</p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">thirdLetter :: String -&gt; Char
-thirdLetter x = x !! 2</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>letter index</p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">letterIndex :: Int -&gt; Char
-letterIndex x = "Curry is awesome!" !! x</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>make reverse function using <code>drop</code> and <code>take</code> for a fixed input. this point includes point 6.</p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">module Reverse where
-
-rvrs :: String -&gt; String
-rvrs x = concat [drop 9 x , " ", take 2 $ drop 6 x, " ", take 5 x]
-
-main :: IO ()
-main = print $ rvrs "Curry is awesome"</code></pre>
-</div>
-</div>
+<p>String/list manipulation functions (includes 1 and 2)</p>
 </li>
 </ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>-- f1 str = str ++ "!"
+f1 :: String -&gt; String
+f1 = (++"!")
+
+f2 :: String -&gt; String
+f2 str = ((take 1).(drop 4)) str
+
+f3 :: String -&gt; String
+-- f3 str = drop 9 str
+f3 = drop 9</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><code><strong>thirdLetter</strong></code></p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>thirdLetter :: String -&gt; Char
+-- thirdLetter str = str !! 2
+thirdLetter = (!! 2)</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Letter index</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>letterIndex :: Int -&gt; Char
+letterIndex n = "Curry is awesome!" !! (n - 1)</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Reverse function using <code>drop</code> and <code>take</code> (for fixed input)</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>import Data.List.Split
+
+rvrs :: String
+-- rvrs = three ++ " " ++ two ++ " " ++ one
+--   where str = "Curry is awesome"
+--         one = take 5 str
+--         two = ((take 2) . (drop 6)) str
+--         three = drop 9 str
+rvrs = unwords . reverse $ splitOn " " "Curry is awesome"</pre>
+</div>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Extension of previous</p>
+</li>
+</ol>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre>module Reverse where
+
+import Data.List.Split
+
+rvrs :: String -&gt; String
+rvrs str = unwords . reverse $ splitOn " " str
+
+main = print $ rvrs "Curry is awesome"</pre>
+</div>
 </div>
 </div>
 </div>
@@ -1336,7 +1368,7 @@ changeMood _ = Blah</code></pre>
 <div class="sect2">
 <h3 id="_4_4_comparing_values">4.4 Comparing values</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_3">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_2">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1520,7 +1552,7 @@ f x y = ((snd x, snd y), (fst x, fst y))</code></pre>
 </ol>
 </div>
 <div class="sect3">
-<h4 id="_reading_syntax">Reading Syntax</h4>
+<h4 id="_reading_syntax_2">Reading Syntax</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1588,7 +1620,7 @@ f xs = w `x` 1
 <div class="sect2">
 <h3 id="_5_4_typeclass_constrained_type_variables">5.4 Typeclass-constrained type variables</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_3">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>pair functions and signatures</p>
 </div>
@@ -1655,7 +1687,7 @@ f (1 :: Int) :: Int -&gt; Int -&gt; Int</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1746,7 +1778,7 @@ kessel (1 :: Integer) 2 :: Integer</code></pre>
 <div class="sect2">
 <h3 id="_5_6_polymorphism">5.6 Polymorphism</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1784,7 +1816,7 @@ f a b = b</code></pre>
 <div class="sect2">
 <h3 id="_5_7_type_inference">5.7 Type inference</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2123,7 +2155,7 @@ munge f g = fst . g . f</code></pre>
 <div class="sect2">
 <h3 id="_6_7_ord">6.7 Ord</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2165,7 +2197,7 @@ munge f g = fst . g . f</code></pre>
 <div class="sect2">
 <h3 id="_6_12_writing_instances_for_your_typeclasses">6.12 Writing instances for your typeclasses</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>Write the <code><strong>Eq</strong></code> instance for the datatype provided</p>
 </div>
@@ -2678,7 +2710,7 @@ f (a, b, c) (d, e, f) = ((a, d), (c, f))</code></pre>
 <div class="sect2">
 <h3 id="_7_6_case_expressions">7.6 Case expressions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>rewrite <code><strong>if-then-else</strong></code> expressions into case expressions</p>
 </div>
@@ -2715,7 +2747,7 @@ ifEvenAdd2' n = case even n of
 <div class="sect2">
 <h3 id="_7_7_higher_order_functions">7.7 Higher-order functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">dodgy :: Num a =&gt; a -&gt; a -&gt; a
@@ -2767,7 +2799,7 @@ oneIsTwo = (flip dodgy) 2</code></pre>
 <div class="sect2">
 <h3 id="_7_8_guards">7.8 Guards</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3298,7 +3330,7 @@ eftChar = undefined</code></pre>
 <div class="sect2">
 <h3 id="_9_6_extracting_portions_of_lists">9.6 Extracting portions of lists</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3526,7 +3558,7 @@ Prelude&gt; let myCube = [y^3 | y &lt;- [1..5]]</code></pre>
 <div class="sect2">
 <h3 id="_9_8_spines_and_non_strict_evaluation">9.8 Spines and non-strict evaluation</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
 
 </div>
 <div class="sect3">
@@ -4022,7 +4054,7 @@ myMinimum xs = myMinimumBy (\a b -&gt; compare a b) xs</code></pre>
 <div class="sect2">
 <h3 id="_10_5_fold_left">10.5 Fold left</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4096,7 +4128,7 @@ foldl (*) 1 [1..5]</code></pre>
 <div class="sect2">
 <h3 id="_10_6_how_to_write_fold_functions">10.6 How to write fold functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_16">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">import Data.Time
@@ -4504,7 +4536,7 @@ isPlane _ = False</code></pre>
 <div class="sect2">
 <h3 id="_11_7_what_makes_these_datatypes_algebraic">11.7 What makes these datatypes algebraic?</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_17">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_16">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4602,7 +4634,7 @@ newtype Goats = Goats Int deriving (Eq, Show, TooMany)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_18">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_17">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4728,7 +4760,7 @@ instance (Num a, Ord a) =&gt; TooMany (a, a) where
 <div class="sect2">
 <h3 id="_11_8_sum_types">11.8 Sum types</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_19">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_18">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4973,7 +5005,7 @@ convert8 Both = True</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_20">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_19">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -7671,7 +7703,7 @@ main = do
 <div class="sect2">
 <h3 id="_16_4_let_s_talk_about_f_baby">16.4 Let’s talk about f , baby</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_21">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_20">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>because kind of <code>(&#8594;)</code> is <code>(&#8594;) :: * &#8594; * &#8594; *</code> the following is</p>
 </div>
