@@ -1,9 +1,9 @@
 import Control.Monad
 import System.Exit (exitSuccess)
-import Data.Char (toLower)
+import Data.Char (toLower, isLetter)
 
 norm :: String -> String
-norm = map toLower
+norm = map toLower . filter isLetter
 
 palindrome :: IO ()
 palindrome = forever $ do
