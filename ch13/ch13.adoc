@@ -77,8 +77,6 @@ include::ch13_13.15_2.hs[]
 ----
 . palindrome on sentences
 +
-WARNING: not sure I get the assignment other than using `toLower`
-+
 [source]
 ----
 include::ch13_13.15_3.hs[]
