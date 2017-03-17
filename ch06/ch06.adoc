@@ -1,7 +1,7 @@
 == 6 Typeclasses
 === 6.7 Ord
 ==== Intermission: Exercises
-. will work, result `*5*` 
+. will work, result `*5*`
 +
 [source]
 ----
@@ -76,7 +76,7 @@ include::ch06_6.12_0_6.hs[]
 === 6.14 Chapter Exercises
 ==== Multiple choice
 . c) The `*Eq*` class makes equality tests possible
-. a) allows any two values to be compared   
+. b) The typeclass `*Ord*` is a subclass of `*Eq*`
 . a) Type of `*>*` is `*Ord a => a -> a -> Bool*`
 . c) the type of x is a tuple in `*x = divMod 16 12*`
 . a) The typeclass `*Integral*` includes `*Int*` and `*Integer*` numbers - and `Word`
