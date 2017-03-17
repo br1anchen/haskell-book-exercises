@@ -4,7 +4,7 @@
 :icons: font
 :toc:
 
-This is *UNOFFICIAL*. In this document you will find finished exercises (hopefully without bugs) and notes for the book *Haskell Programming from first principles* from *Chris Allen* and *Julie Monoruki*. More details about the book and a place where to purchase it - http://haskellbook.com/
+This is *UNOFFICIAL*. In this document you will find finished exercises (hopefully without bugs) and notes for the book *Haskell Programming from first principles* from *Chris Allen* and *Julie Moronuki*. More details about the book and a place where to purchase it - http://haskellbook.com/
 
 Sources for this documents are at https://github.com/lukleh/haskell-book-exercises
 
