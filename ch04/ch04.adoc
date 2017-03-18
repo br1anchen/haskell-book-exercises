@@ -1,5 +1,6 @@
-== 4 Basic datatypes
-=== 4.2 Anatomy of a data declaration
+== 4 Basic Datatypes
+=== 4.3 Anatomy of a data declaration
+==== Exercises: Mood Swing
 
 given data type, answer
 [source]
@@ -17,9 +18,9 @@ include::ch04_4.2_0.hs[]
 ----
 . done :)
 
-=== 4.4 Comparing values
-==== Intermission: Exercises
-. bug
+=== 4.6 Go on and Bool me
+==== Exercises: Find the Mistakes
+. incorrect, `true` -> `True`
 +
 [source]
 ----
@@ -27,7 +28,7 @@ not True && true
 -- fix
 not True && True
 ----
-. bug
+. incorrect, `=` -> `==`
 +
 [source]
 ----
@@ -41,7 +42,7 @@ not (x == 6)
 ----
 (1 * 2) > 5
 ----
-. bug
+. incorrect string formatting
 +
 [source]
 ----
@@ -49,7 +50,7 @@ not (x == 6)
 -- fix
 ["Merry"] > ["Happy"]
 ----
-. bug
+. incorrect type combination
 +
 [source]
 ----
@@ -58,7 +59,7 @@ not (x == 6)
 ['1', '2', '3'] ++ "look at me!"
 ----
 
-=== 4.7 Chapter Exercises
+=== 4.9 Chapter Exercises
 
 [source]
 ----
@@ -68,13 +69,13 @@ allAwesome = [awesome, alsoAwesome]
 ----
 
 . length
-.. type signature
+.. type signature:
 +
 [source]
 ----
-:: [a] -> Int
+length :: [a] -> Int
 ----
-.. takes one argument
+.. takes one argument, a list
 .. result is `Int`
 . results
 .. `length [1, 2, 3, 4, 5] == 5`
@@ -90,7 +91,7 @@ allAwesome = [awesome, alsoAwesome]
 -- both values need to be Fractional, length returns Int
 6 / length [1, 2, 3]
 ----
-. fixed previous example
+. fixed previous example using integral division operator, `div`
 +
 [source]
 ----
@@ -138,7 +139,7 @@ include::ch04_4.7_1.hs[]
 include::ch04_4.7_2.hs[]
 ----
 
-==== Reading Syntax
+==== Correcting Syntax
 
 . length + 1
 +
