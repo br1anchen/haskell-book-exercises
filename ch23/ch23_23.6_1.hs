@@ -28,6 +28,5 @@ instance Monad (Moi s) where
   (>>=) :: Moi s a
         -> (a -> Moi s b)
         -> Moi s b
-  (Moi f) >>= g = Moi $ \s -> let a = fst $ f s
-                                  ms = runMoi $ g a
-                              in ms s
+  (Moi f) >>= g = Moi $ \s -> let (a, s') = f s
+                              in runMoi (g a) s'
