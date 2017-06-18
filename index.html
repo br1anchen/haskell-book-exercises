@@ -456,11 +456,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_5_types">5 Types</a>
 <ul class="sectlevel2">
-<li><a href="#_5_4_typeclass_constrained_type_variables">5.4 Typeclass-constrained type variables</a></li>
-<li><a href="#_5_5_currying">5.5 Currying</a></li>
-<li><a href="#_5_6_polymorphism">5.6 Polymorphism</a></li>
-<li><a href="#_5_7_type_inference">5.7 Type inference</a></li>
-<li><a href="#_5_9_chapter_exercises">5.9 Chapter Exercises</a></li>
+<li><a href="#_5_3_how_to_read_type_signatures">5.3 How to read type signatures</a></li>
+<li><a href="#_5_4_currying">5.4 Currying</a></li>
+<li><a href="#_5_5_polymorphism">5.5 Polymorphism</a></li>
+<li><a href="#_5_6_type_inference">5.6 Type inference</a></li>
+<li><a href="#_5_8_chapter_exercises">5.8 Chapter Exercises</a></li>
 </ul>
 </li>
 <li><a href="#_6_typeclasses">6 Typeclasses</a>
@@ -1622,9 +1622,9 @@ f xs = w `x` 1
 <h2 id="_5_types">5 Types</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_5_4_typeclass_constrained_type_variables">5.4 Typeclass-constrained type variables</h3>
+<h3 id="_5_3_how_to_read_type_signatures">5.3 How to read type signatures</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_2">Intermission: Exercises</h4>
+<h4 id="_exercises_type_matching">Exercises: Type Matching</h4>
 <div class="paragraph">
 <p>pair functions and signatures</p>
 </div>
@@ -1675,23 +1675,19 @@ f xs = w `x` 1
 </div>
 </div>
 <div class="sect2">
-<h3 id="_5_5_currying">5.5 Currying</h3>
+<h3 id="_5_4_currying">5.4 Currying</h3>
 <div class="paragraph">
-<p>test like this</p>
+<p>Test like this (first question as example)</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">Prelude&gt; let f :: a -&gt; a -&gt; a -&gt; a; f = undefined
-Prelude&gt; :t f undefined
-f undefined :: a -&gt; a -&gt; a
-Prelude&gt; :t f 1
-f 1 :: Num a =&gt; a -&gt; a -&gt; a
-Prelude&gt; :t f (1 :: Int)
-f (1 :: Int) :: Int -&gt; Int -&gt; Int</code></pre>
+Prelude&gt; let x :: Char; x = undefined
+Prelude&gt; :t f x</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_3">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_2">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1699,7 +1695,7 @@ f (1 :: Int) :: Int -&gt; Int -&gt; Int</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">f :: a -&gt; a -&gt; a -&gt; a
-f 'a' :: Char -&gt; Char -&gt; Char</code></pre>
+f x :: Char -&gt; Char -&gt; Char</code></pre>
 </div>
 </div>
 </li>
@@ -1744,7 +1740,7 @@ jackal "keyboard" "has the word jackal in it" :: [Char]</code></pre>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">jackal :: (Ord a, Eq b) =&gt; a -&gt; b -&gt; a
-jackal "keyboard" "has the word jackal in it" :: Eq b =&gt; b -&gt; [Char]</code></pre>
+jackal "keyboard" :: Eq b =&gt; b -&gt; [Char]</code></pre>
 </div>
 </div>
 </li>
@@ -1780,9 +1776,9 @@ kessel (1 :: Integer) 2 :: Integer</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_5_6_polymorphism">5.6 Polymorphism</h3>
+<h3 id="_5_5_polymorphism">5.5 Polymorphism</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
+<h4 id="_exercises_parametricity">Exercises: Parametricity</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -1818,13 +1814,13 @@ f a b = b</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_5_7_type_inference">5.7 Type inference</h3>
+<h3 id="_5_6_type_inference">5.6 Type inference</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_3">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><code>[Char] &#8594; [Char]</code></p>
+<p><code>myConcat :: [Char] &#8594; [Char]</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">(++) :: [a] -&gt; [a] -&gt; [a]
@@ -1833,7 +1829,7 @@ myConcat x = x ++ " yo"</code></pre>
 </div>
 </li>
 <li>
-<p><code>Fractional a &#8658; a &#8594; a</code></p>
+<p><code>myMult :: Fractional a &#8658; a &#8594; a</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">(*) :: Num a =&gt; a -&gt; a -&gt; a
@@ -1842,7 +1838,7 @@ myMult x = (x / 3) * 5</code></pre>
 </div>
 </li>
 <li>
-<p><code>Int &#8594; [Char]</code></p>
+<p><code>myTake :: Int &#8594; [Char]</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">take :: Int -&gt; [a] -&gt; [a]
@@ -1851,7 +1847,7 @@ myTake x = take x "hey you"</code></pre>
 </div>
 </li>
 <li>
-<p><code>Int &#8594; Bool</code></p>
+<p><code>myCom :: Int &#8594; Bool</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">(&gt;) :: Ord a =&gt; a -&gt; a -&gt; Bool
@@ -1860,7 +1856,7 @@ myCom x = x &gt; (length [1..10])</code></pre>
 </div>
 </li>
 <li>
-<p><code>Char &#8594; Bool</code></p>
+<p><code>myAlph :: Char &#8594; Bool</code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">(&lt;) :: Ord a =&gt; a -&gt; a -&gt; Bool
@@ -1873,7 +1869,7 @@ myAlph x = x &lt; 'z'</code></pre>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_5_9_chapter_exercises">5.9 Chapter Exercises</h3>
+<h3 id="_5_8_chapter_exercises">5.8 Chapter Exercises</h3>
 <div class="sect3">
 <h4 id="_multiple_choice">Multiple choice</h4>
 <div class="olist arabic">
@@ -1945,7 +1941,7 @@ myAlph x = x &lt; 'z'</code></pre>
 <p><code>wahoo = bigNum $ 10</code> breaks, because <code>bigNum</code> is a value, not a function</p>
 </li>
 <li>
-<p>works fine in GHCI, should work too in file</p>
+<p>works fine; is an example of partial application.</p>
 </li>
 <li>
 <p>breaks on <code>c = b 10</code>, <code>b</code> has value <code>5</code>, cannot apply value to a value</p>
@@ -2068,7 +2064,7 @@ main = do
 <div class="sect3">
 <h4 id="_type_kwon_do">Type-Kwon-Do</h4>
 <div class="paragraph">
-<p>full example for this section, it is al only about type checking</p>
+<p>full example for this section, it is all only about type checking</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2159,7 +2155,7 @@ munge f g = fst . g . f</code></pre>
 <div class="sect2">
 <h3 id="_6_7_ord">6.7 Ord</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -2201,7 +2197,7 @@ munge f g = fst . g . f</code></pre>
 <div class="sect2">
 <h3 id="_6_12_writing_instances_for_your_typeclasses">6.12 Writing instances for your typeclasses</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>Write the <code><strong>Eq</strong></code> instance for the datatype provided</p>
 </div>
@@ -2714,7 +2710,7 @@ f (a, b, c) (d, e, f) = ((a, d), (c, f))</code></pre>
 <div class="sect2">
 <h3 id="_7_6_case_expressions">7.6 Case expressions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>rewrite <code><strong>if-then-else</strong></code> expressions into case expressions</p>
 </div>
@@ -2751,7 +2747,7 @@ ifEvenAdd2' n = case even n of
 <div class="sect2">
 <h3 id="_7_7_higher_order_functions">7.7 Higher-order functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">dodgy :: Num a =&gt; a -&gt; a -&gt; a
@@ -2803,7 +2799,7 @@ oneIsTwo = (flip dodgy) 2</code></pre>
 <div class="sect2">
 <h3 id="_7_8_guards">7.8 Guards</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3334,7 +3330,7 @@ eftChar = undefined</code></pre>
 <div class="sect2">
 <h3 id="_9_6_extracting_portions_of_lists">9.6 Extracting portions of lists</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3562,7 +3558,7 @@ Prelude&gt; let myCube = [y^3 | y &lt;- [1..5]]</code></pre>
 <div class="sect2">
 <h3 id="_9_8_spines_and_non_strict_evaluation">9.8 Spines and non-strict evaluation</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
 
 </div>
 <div class="sect3">
@@ -4058,7 +4054,7 @@ myMinimum xs = myMinimumBy (\a b -&gt; compare a b) xs</code></pre>
 <div class="sect2">
 <h3 id="_10_5_fold_left">10.5 Fold left</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4132,7 +4128,7 @@ foldl (*) 1 [1..5]</code></pre>
 <div class="sect2">
 <h3 id="_10_6_how_to_write_fold_functions">10.6 How to write fold functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">import Data.Time
@@ -4540,7 +4536,7 @@ isPlane _ = False</code></pre>
 <div class="sect2">
 <h3 id="_11_7_what_makes_these_datatypes_algebraic">11.7 What makes these datatypes algebraic?</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4638,7 +4634,7 @@ newtype Goats = Goats Int deriving (Eq, Show, TooMany)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_16">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4764,7 +4760,7 @@ instance (Num a, Ord a) =&gt; TooMany (a, a) where
 <div class="sect2">
 <h3 id="_11_8_sum_types">11.8 Sum types</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_17">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5009,7 +5005,7 @@ convert8 Both = True</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_18">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_16">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -7695,7 +7691,7 @@ main = do
 <div class="sect2">
 <h3 id="_16_4_let_s_talk_about_f_baby">16.4 Let’s talk about f , baby</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_19">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_17">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>because kind of <code>(&#8594;)</code> is <code>(&#8594;) :: * &#8594; * &#8594; *</code> the following is</p>
 </div>
@@ -11532,7 +11528,7 @@ main = do
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-17 19:08:58 CDT
+Last updated 2017-06-12 23:28:27 MDT
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">

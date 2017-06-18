@@ -1,9 +1,9 @@
 == 5 Types
-=== 5.4 Typeclass-constrained type variables
-==== Intermission: Exercises
+=== 5.3 How to read type signatures
+==== Exercises: Type Matching
 pair functions and signatures
 
-. a) c) 
+. a) c)
 +
 [source]
 ----
@@ -34,18 +34,14 @@ head :: [a] -> a
 (<) :: Ord a => a -> a -> Bool
 ----
 
-=== 5.5 Currying
+=== 5.4 Currying
 
-test like this
+Test like this (first question as example)
 [source]
 ----
 Prelude> let f :: a -> a -> a -> a; f = undefined
-Prelude> :t f undefined
-f undefined :: a -> a -> a
-Prelude> :t f 1
-f 1 :: Num a => a -> a -> a
-Prelude> :t f (1 :: Int)
-f (1 :: Int) :: Int -> Int -> Int
+Prelude> let x :: Char; x = undefined
+Prelude> :t f x
 ----
 ==== Intermission: Exercises
 . a)
@@ -53,7 +49,7 @@ f (1 :: Int) :: Int -> Int -> Int
 [source]
 ----
 f :: a -> a -> a -> a
-f 'a' :: Char -> Char -> Char
+f x :: Char -> Char -> Char
 ----
 . d)
 +
@@ -88,7 +84,7 @@ jackal "keyboard" "has the word jackal in it" :: [Char]
 [source]
 ----
 jackal :: (Ord a, Eq b) => a -> b -> a
-jackal "keyboard" "has the word jackal in it" :: Eq b => b -> [Char]
+jackal "keyboard" :: Eq b => b -> [Char]
 ----
 . d)
 +
@@ -112,8 +108,8 @@ kessel :: (Ord a, Num b) => a -> b -> a
 kessel (1 :: Integer) 2 :: Integer
 ----
 
-=== 5.6 Polymorphism
-==== Intermission: Exercises
+=== 5.5 Polymorphism
+==== Exercises: Parametricity
 . id
 +
 [source]
@@ -137,37 +133,37 @@ f :: a -> b -> b
 f a b = b
 ----
 
-=== 5.7 Type inference
+=== 5.6 Type inference
 ==== Intermission: Exercises
-. `[Char] -> [Char]`
+. `myConcat :: [Char] -> [Char]`
 +
 [source]
 ----
 (++) :: [a] -> [a] -> [a]
 myConcat x = x ++ " yo"
 ----
-. `Fractional a => a -> a`
+. `myMult :: Fractional a => a -> a`
 +
 [source]
 ----
 (*) :: Num a => a -> a -> a
 myMult x = (x / 3) * 5
 ----
-. `Int -> [Char]`
+. `myTake :: Int -> [Char]`
 +
 [source]
 ----
 take :: Int -> [a] -> [a]
 myTake x = take x "hey you"
 ----
-. `Int -> Bool`
+. `myCom :: Int -> Bool`
 +
 [source]
 ----
 (>) :: Ord a => a -> a -> Bool
 myCom x = x > (length [1..10])
 ----
-. `Char -> Bool`
+. `myAlph :: Char -> Bool`
 +
 [source]
 ----
@@ -175,7 +171,7 @@ myCom x = x > (length [1..10])
 myAlph x = x < 'z'
 ----
 
-=== 5.9 Chapter Exercises
+=== 5.8 Chapter Exercises
 ==== Multiple choice
 . c) value of type `*[a]*` is a list whose elements are all of some type `*a*`
 . a) function of type `*\[[a]] -> [a]*` could take a list of strings as an argument
@@ -197,7 +193,7 @@ myAlph x = x < 'z'
 
 ==== Does it compile?
 . `wahoo = bigNum $ 10` breaks, because `bigNum` is a value, not a function
-. works fine in GHCI, should work too in file
+. works fine; is an example of partial application.
 . breaks on `c = b 10`, `b` has value `5`, cannot apply value to a value
 . breaks on `b = 10000 * c`, `c` is not defined
 
@@ -236,7 +232,7 @@ include::ch05_5.9_2.hs[]
 ----
 
 ==== Type-Kwon-Do
-full example for this section, it is al only about type checking
+full example for this section, it is all only about type checking
 [source]
 ----
 include::ch05_5.9_3.hs[]
