@@ -17,7 +17,7 @@ theDatabase =
               (secondsToDiffTime 34123))
   ]
 
--- tried the same with filter and map, not woth it. fold is the way
+-- tried the same with filter and map, not worth it. fold is the way
 filterDbDate :: [DatabaseItem] -> [UTCTime]
 filterDbDate = foldr f []
   where f (DbDate a) b = a : b
@@ -28,13 +28,8 @@ filterDbNumber = foldr f []
   where f (DbNumber a) b = a : b
         f _ b = b
 
--- I need a base, not ideal, but UTCTime long in the past will do now
 mostRecent :: [DatabaseItem] -> UTCTime
-mostRecent = foldr f (UTCTime (fromGregorian 0 1 1) (secondsToDiffTime 0))
-  where f (DbDate a) b
-          | a > b = a
-          | otherwise = b
-        f _ b = b
+mostRecent = maximum . filterDbDate
 
 sumDb :: [DatabaseItem] -> Integer
 sumDb = foldr f 0
