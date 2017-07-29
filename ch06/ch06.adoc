@@ -1,33 +1,6 @@
 == 6 Typeclasses
-=== 6.7 Ord
-==== Intermission: Exercises
-. will work, result `*5*`
-+
-[source]
-----
-max (length [1, 2, 3]) (length [8, 9, 10, 11, 12])
-----
-. will work, result `*LT*`
-+
-[source]
-----
-compare (3 * 4) (3 * 5)
-----
-. will not work, parameters are different type
-+
-[source]
-----
-compare "Julie" True
-----
-. will work, result `*False*`
-+
-[source]
-----
-(5 + 3) > (3 + 6)
-----
-
-=== 6.12 Writing instances for your typeclasses
-==== Intermission: Exercises
+=== 6.5 Writing instances for your typeclasses
+==== Exercises: Eq Instances
 Write the `*Eq*` instance for the datatype provided
 
 . TisAnInteger
@@ -73,6 +46,33 @@ include::ch06_6.12_0_5.hs[]
 include::ch06_6.12_0_6.hs[]
 ----
 
+=== 6.8 Ord
+==== Exercises: Will They Work?
+. will work, result `*5*`
++
+[source]
+----
+max (length [1, 2, 3]) (length [8, 9, 10, 11, 12])
+----
+. will work, result `*LT*`
++
+[source]
+----
+compare (3 * 4) (3 * 5)
+----
+. will not work, parameters are different type
++
+[source]
+----
+compare "Julie" True
+----
+. will work, result `*False*`
++
+[source]
+----
+(5 + 3) > (3 + 6)
+----
+
 === 6.14 Chapter Exercises
 ==== Multiple choice
 . c) The `*Eq*` class makes equality tests possible
@@ -82,20 +82,20 @@ include::ch06_6.12_0_6.hs[]
 . a) The typeclass `*Integral*` includes `*Int*` and `*Integer*` numbers - and `Word`
 
 ==== Does it typecheck?
-. data `*Person*` need to to be instance of `*Show*`
+. data `*Person*` need to have an instance of `*Show*`
 +
 [source]
 ----
 include::ch06_6.12_1.hs[]
 ----
-. data `*Mood*` need to to be instance of `*Eq*`
+. data `*Mood*` need to have an instance of `*Eq*`
 +
 [source]
 ----
 include::ch06_6.12_2.hs[]
 ----
 . `*settleDown*`
-.. inputs can be `*Woot*` or `*Blah*`
+.. inputs must have the type `Mood`, and can be `*Woot*` or `*Blah*`
 .. type error `No instance for (Num Mood) arising from the literal ‘9’` - different types and `Mood` is not in `Num`
 .. `*Blah > Woot*` raises error, because `*Mood*` is not instance of `*Ord*`
 . following code type checks
@@ -143,7 +143,7 @@ comparePapus p p' = p > p'
 ==== Match the types
 can you substitute signature
 
-. Value `1` cannot be an needs at least `*Num*`
+. Value `1` cannot be `a`, needs at least `*Num*`
 +
 [source]
 ----
@@ -265,3 +265,4 @@ include::ch06_6.14_0.hs[]
 ----
 include::ch06_6.14_1.hs[]
 ----
+

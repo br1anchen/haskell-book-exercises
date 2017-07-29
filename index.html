@@ -465,8 +465,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#_6_typeclasses">6 Typeclasses</a>
 <ul class="sectlevel2">
-<li><a href="#_6_7_ord">6.7 Ord</a></li>
-<li><a href="#_6_12_writing_instances_for_your_typeclasses">6.12 Writing instances for your typeclasses</a></li>
+<li><a href="#_6_5_writing_instances_for_your_typeclasses">6.5 Writing instances for your typeclasses</a></li>
+<li><a href="#_6_8_ord">6.8 Ord</a></li>
 <li><a href="#_6_14_chapter_exercises">6.14 Chapter Exercises</a></li>
 </ul>
 </li>
@@ -2153,51 +2153,9 @@ munge f g = fst . g . f</code></pre>
 <h2 id="_6_typeclasses">6 Typeclasses</h2>
 <div class="sectionbody">
 <div class="sect2">
-<h3 id="_6_7_ord">6.7 Ord</h3>
+<h3 id="_6_5_writing_instances_for_your_typeclasses">6.5 Writing instances for your typeclasses</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>will work, result <code><strong>5</strong></code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">max (length [1, 2, 3]) (length [8, 9, 10, 11, 12])</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>will work, result <code><strong>LT</strong></code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">compare (3 * 4) (3 * 5)</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>will not work, parameters are different type</p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">compare "Julie" True</code></pre>
-</div>
-</div>
-</li>
-<li>
-<p>will work, result <code><strong>False</strong></code></p>
-<div class="listingblock">
-<div class="content">
-<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">(5 + 3) &gt; (3 + 6)</code></pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_6_12_writing_instances_for_your_typeclasses">6.12 Writing instances for your typeclasses</h3>
-<div class="sect3">
-<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
+<h4 id="_exercises_eq_instances">Exercises: Eq Instances</h4>
 <div class="paragraph">
 <p>Write the <code><strong>Eq</strong></code> instance for the datatype provided</p>
 </div>
@@ -2301,6 +2259,48 @@ instance (Eq a, Eq b) =&gt; Eq (EitherOr a b) where
 </div>
 </div>
 <div class="sect2">
+<h3 id="_6_8_ord">6.8 Ord</h3>
+<div class="sect3">
+<h4 id="_exercises_will_they_work">Exercises: Will They Work?</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>will work, result <code><strong>5</strong></code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">max (length [1, 2, 3]) (length [8, 9, 10, 11, 12])</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>will work, result <code><strong>LT</strong></code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">compare (3 * 4) (3 * 5)</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>will not work, parameters are different type</p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">compare "Julie" True</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>will work, result <code><strong>False</strong></code></p>
+<div class="listingblock">
+<div class="content">
+<pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">(5 + 3) &gt; (3 + 6)</code></pre>
+</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2">
 <h3 id="_6_14_chapter_exercises">6.14 Chapter Exercises</h3>
 <div class="sect3">
 <h4 id="_multiple_choice_2">Multiple choice</h4>
@@ -2329,7 +2329,7 @@ instance (Eq a, Eq b) =&gt; Eq (EitherOr a b) where
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>data <code><strong>Person</strong></code> need to to be instance of <code><strong>Show</strong></code></p>
+<p>data <code><strong>Person</strong></code> need to have an instance of <code><strong>Show</strong></code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">data Person = Person Bool deriving Show
@@ -2339,7 +2339,7 @@ printPerson person = putStrLn (show person)</code></pre>
 </div>
 </li>
 <li>
-<p>data <code><strong>Mood</strong></code> need to to be instance of <code><strong>Eq</strong></code></p>
+<p>data <code><strong>Mood</strong></code> need to have an instance of <code><strong>Eq</strong></code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">data Mood = Blah
@@ -2356,7 +2356,7 @@ settleDown x = if x == Woot
 <div class="olist loweralpha">
 <ol class="loweralpha" type="a">
 <li>
-<p>inputs can be <code><strong>Woot</strong></code> or <code><strong>Blah</strong></code></p>
+<p>inputs must have the type <code>Mood</code>, and can be <code><strong>Woot</strong></code> or <code><strong>Blah</strong></code></p>
 </li>
 <li>
 <p>type error <code>No instance for (Num Mood) arising from the literal ‘9’</code> - different types and <code>Mood</code> is not in <code>Num</code></p>
@@ -2452,7 +2452,7 @@ comparePapus p p' = p &gt; p'</code></pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Value <code>1</code> cannot be an needs at least <code><strong>Num</strong></code></p>
+<p>Value <code>1</code> cannot be <code>a</code>, needs at least <code><strong>Num</strong></code></p>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">i :: Num a =&gt; a
@@ -11528,7 +11528,7 @@ main = do
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-12 23:28:27 MDT
+Last updated 2017-06-13 00:28:27 CDT
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
