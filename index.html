@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 1.5.5">
+<meta name="generator" content="Asciidoctor 1.5.4">
 <title>Exercises and notes for book "Haskell Programming from first principles" - Unofficial</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -17,6 +17,7 @@ audio:not([controls]){display:none;height:0}
 [hidden],template{display:none}
 script{display:none!important}
 html{font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}
+body{margin:0}
 a{background:transparent}
 a:focus{outline:thin dotted}
 a:active,a:hover{outline:0}
@@ -51,7 +52,7 @@ textarea{overflow:auto;vertical-align:top}
 table{border-collapse:collapse;border-spacing:0}
 *,*:before,*:after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
 html,body{font-size:100%}
-body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto;tab-size:4;-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased}
+body{background:#fff;color:rgba(0,0,0,.8);padding:0;margin:0;font-family:"Noto Serif","DejaVu Serif",serif;font-weight:400;font-style:normal;line-height:1;position:relative;cursor:auto}
 a:hover{cursor:pointer}
 img,object,embed{max-width:100%;height:auto}
 object,embed{height:100%}
@@ -63,6 +64,7 @@ img{-ms-interpolation-mode:bicubic}
 .text-center{text-align:center!important}
 .text-justify{text-align:justify!important}
 .hide{display:none}
+body{-webkit-font-smoothing:antialiased}
 img,object,svg{display:inline-block;vertical-align:middle}
 textarea{height:auto;min-height:50px}
 select{width:100%}
@@ -117,16 +119,13 @@ table thead tr th,table thead tr td,table tfoot tr th,table tfoot tr td{padding:
 table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
 table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
 table thead tr th,table tfoot tr th,table tbody tr td,table tr td,table tfoot tr td{display:table-cell;line-height:1.6}
+body{tab-size:4}
 h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
 h1 strong,h2 strong,h3 strong,#toctitle strong,.sidebarblock>.content>.title strong,h4 strong,h5 strong,h6 strong{font-weight:400}
 .clearfix:before,.clearfix:after,.float-group:before,.float-group:after{content:" ";display:table}
 .clearfix:after,.float-group:after{clear:both}
-*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
-*:not(pre)>code.nobreak{word-wrap:normal}
-*:not(pre)>code.nowrap{white-space:nowrap}
+*:not(pre)>code{font-size:.9375em;font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed}
 pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
-em em{font-style:normal}
-strong strong{font-weight:400}
 .keyseq{color:rgba(51,51,51,.8)}
 kbd{font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;display:inline-block;color:rgba(0,0,0,.8);font-size:.65em;line-height:1.45;background-color:#f7f7f7;border:1px solid #ccc;-webkit-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em white inset;box-shadow:0 1px 0 rgba(0,0,0,.2),0 0 0 .1em #fff inset;margin:0 .15em;padding:.2em .5em;vertical-align:middle;position:relative;top:-.1em;white-space:nowrap}
 .keyseq kbd:first-child{margin-left:0}
@@ -417,7 +416,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 </head>
 <body class="article">
 <div id="header">
@@ -2710,7 +2709,7 @@ f (a, b, c) (d, e, f) = ((a, d), (c, f))</code></pre>
 <div class="sect2">
 <h3 id="_7_6_case_expressions">7.6 Case expressions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_4">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>rewrite <code><strong>if-then-else</strong></code> expressions into case expressions</p>
 </div>
@@ -2747,7 +2746,7 @@ ifEvenAdd2' n = case even n of
 <div class="sect2">
 <h3 id="_7_7_higher_order_functions">7.7 Higher-order functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_5">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">dodgy :: Num a =&gt; a -&gt; a -&gt; a
@@ -2799,7 +2798,7 @@ oneIsTwo = (flip dodgy) 2</code></pre>
 <div class="sect2">
 <h3 id="_7_8_guards">7.8 Guards</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_6">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3330,7 +3329,7 @@ eftChar = undefined</code></pre>
 <div class="sect2">
 <h3 id="_9_6_extracting_portions_of_lists">9.6 Extracting portions of lists</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_7">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -3558,7 +3557,7 @@ Prelude&gt; let myCube = [y^3 | y &lt;- [1..5]]</code></pre>
 <div class="sect2">
 <h3 id="_9_8_spines_and_non_strict_evaluation">9.8 Spines and non-strict evaluation</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_8">Intermission: Exercises</h4>
 
 </div>
 <div class="sect3">
@@ -4054,7 +4053,7 @@ myMinimum xs = myMinimumBy (\a b -&gt; compare a b) xs</code></pre>
 <div class="sect2">
 <h3 id="_10_5_fold_left">10.5 Fold left</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_9">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4128,7 +4127,7 @@ foldl (*) 1 [1..5]</code></pre>
 <div class="sect2">
 <h3 id="_10_6_how_to_write_fold_functions">10.6 How to write fold functions</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_10">Intermission: Exercises</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="prettyprint highlight"><code class="language-haskell" data-lang="haskell">import Data.Time
@@ -4150,7 +4149,7 @@ theDatabase =
               (secondsToDiffTime 34123))
   ]
 
--- tried the same with filter and map, not woth it. fold is the way
+-- tried the same with filter and map, not worth it. fold is the way
 filterDbDate :: [DatabaseItem] -&gt; [UTCTime]
 filterDbDate = foldr f []
   where f (DbDate a) b = a : b
@@ -4161,13 +4160,8 @@ filterDbNumber = foldr f []
   where f (DbNumber a) b = a : b
         f _ b = b
 
--- I need a base, not ideal, but UTCTime long in the past will do now
 mostRecent :: [DatabaseItem] -&gt; UTCTime
-mostRecent = foldr f (UTCTime (fromGregorian 0 1 1) (secondsToDiffTime 0))
-  where f (DbDate a) b
-          | a &gt; b = a
-          | otherwise = b
-        f _ b = b
+mostRecent = maximum . filterDbDate
 
 sumDb :: [DatabaseItem] -&gt; Integer
 sumDb = foldr f 0
@@ -4536,7 +4530,7 @@ isPlane _ = False</code></pre>
 <div class="sect2">
 <h3 id="_11_7_what_makes_these_datatypes_algebraic">11.7 What makes these datatypes algebraic?</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_11">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4634,7 +4628,7 @@ newtype Goats = Goats Int deriving (Eq, Show, TooMany)</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_12">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -4760,7 +4754,7 @@ instance (Num a, Ord a) =&gt; TooMany (a, a) where
 <div class="sect2">
 <h3 id="_11_8_sum_types">11.8 Sum types</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_13">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -5005,7 +4999,7 @@ convert8 Both = True</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="_intermission_exercises_16">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_14">Intermission: Exercises</h4>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
@@ -7691,7 +7685,7 @@ main = do
 <div class="sect2">
 <h3 id="_16_4_let_s_talk_about_f_baby">16.4 Let’s talk about f , baby</h3>
 <div class="sect3">
-<h4 id="_intermission_exercises_17">Intermission: Exercises</h4>
+<h4 id="_intermission_exercises_15">Intermission: Exercises</h4>
 <div class="paragraph">
 <p>because kind of <code>(&#8594;)</code> is <code>(&#8594;) :: * &#8594; * &#8594; *</code> the following is</p>
 </div>
@@ -10799,8 +10793,8 @@ instance Applicative (Moi s) where
   (&lt;*&gt;) :: Moi s (a -&gt; b)
         -&gt; Moi s a
         -&gt; Moi s b
-  (Moi f) &lt;*&gt; (Moi g) = Moi $ \s -&gt; let fab = fst $ f s
-                                        (a, b) = g s
+  (Moi f) &lt;*&gt; (Moi g) = Moi $ \s -&gt; let (fab, s') = f s
+                                        (a, b) = g s'
                                     in (fab a, b)
 
 instance Monad (Moi s) where
@@ -10809,9 +10803,8 @@ instance Monad (Moi s) where
   (&gt;&gt;=) :: Moi s a
         -&gt; (a -&gt; Moi s b)
         -&gt; Moi s b
-  (Moi f) &gt;&gt;= g = Moi $ \s -&gt; let a = fst $ f s
-                                  ms = runMoi $ g a
-                              in ms s</code></pre>
+  (Moi f) &gt;&gt;= g = Moi $ \s -&gt; let (a, s') = f s
+                              in runMoi (g a) s'</code></pre>
 </div>
 </div>
 </div>
@@ -11528,7 +11521,7 @@ main = do
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-06-13 00:28:27 CDT
+Last updated 2017-03-17 21:02:25 CET
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prettify/r298/prettify.min.css">
